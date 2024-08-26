@@ -1,36 +1,53 @@
 # this allows us to use code from
 # the open-source pygame library
 # throughout this file
-from constants import *
-
-import random
 
 def main():
+    import constants as con
+    import random
     import pygame
     import time
     pygame.init
-    
-    print("Starting asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
+    import player as py
+    framerate = pygame.time.Clock()
 
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    
+    dt = 0
+
+    print("Starting asteroids!")
+    print(f"Screen width: {con.SCREEN_WIDTH}")
+    print(f"Screen height: {con.SCREEN_HEIGHT}")
+
+    screen = pygame.display.set_mode((con.SCREEN_WIDTH, con.SCREEN_HEIGHT))
+    character = py.Player(con.SCREEN_WIDTH / 2, con.SCREEN_HEIGHT / 2)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+            
+        screen.fill("black")
+        character.draw(screen)
+        character.update(dt)
+        
+
+        pygame.display.flip()
+        framerate.tick(60)
+        dt = framerate.tick(60) / 1000
+
+main()
+
+
+
+
+
+"""
+
+
     recta = pygame.Rect(500, 300, 100, 100)
     rectb = pygame.Rect(500, 300, 150, 150)
     rect_c = pygame.Rect(500, 300, 150, 150)
 
-    while True:
         colors = [ "blue", "red", "purple", "yellow", "pink", "green", "pink", "orange", "brown", "white" ]
-        time.sleep(0.001)
-        screen.fill("black")
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return
-
-
-
 
         # recta.inflate_ip( 1, 1 )
         recta.width = random.randrange(10, 200)
@@ -58,22 +75,4 @@ def main():
         pygame.draw.rect(screen, random.choice( colors ), rect_c)
         
 
-        pygame.display.flip()
-        
-        '''
-        pygame.Rect(recta).inflate(100, 100)
-
-        rectb = pygame.Rect(recta)
-        rectb.inflate( 100, 100 )
-        '''
-
-class Rect:
-    def __init_( self, x, y, h, w ):
-        pass
-
-    def inflate( self, x, y ):
-        return Rect( x, y, self.h, self.w )
-        
-
-
-main()
+"""
