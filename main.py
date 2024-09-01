@@ -9,9 +9,19 @@ def main():
     import time
     pygame.init
     import player as py
+    import asteroids as ast
+    import asteroidfield as asf
+
     framerate = pygame.time.Clock()
 
     dt = 0
+
+    drawable = pygame.sprite.Group()
+    updateable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+    py.Player.containers = (drawable, updateable)
+    ast.Asteroids.containers = (asteroids, drawable, updateable)
+    asf.AsteroidField.containers = (updateable)
 
     print("Starting asteroids!")
     print(f"Screen width: {con.SCREEN_WIDTH}")
@@ -19,6 +29,7 @@ def main():
 
     screen = pygame.display.set_mode((con.SCREEN_WIDTH, con.SCREEN_HEIGHT))
     character = py.Player(con.SCREEN_WIDTH / 2, con.SCREEN_HEIGHT / 2)
+    field = asf.AsteroidField()
 
 
 
@@ -28,8 +39,12 @@ def main():
                 return
             
         screen.fill("black")
-        character.draw(screen)
-        character.update(dt)
+
+        for object in drawable:
+            object.draw(screen)
+
+        for object in updateable:
+            object.update(dt)
 
         pygame.display.flip()
         framerate.tick(60)
