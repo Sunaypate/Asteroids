@@ -20,6 +20,8 @@ def main():
     screen = pygame.display.set_mode((con.SCREEN_WIDTH, con.SCREEN_HEIGHT))
     character = py.Player(con.SCREEN_WIDTH / 2, con.SCREEN_HEIGHT / 2)
 
+
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -28,7 +30,6 @@ def main():
         screen.fill("black")
         character.draw(screen)
         character.update(dt)
-        
 
         pygame.display.flip()
         framerate.tick(60)
