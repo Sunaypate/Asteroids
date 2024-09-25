@@ -53,6 +53,12 @@ def main():
             else:
                 pass
 
+            for bullet in shots:
+                if bullet.collision(asteroid) == True:
+                    bullet.kill(), asteroid.split()
+
+
+
         for object in drawable:
             object.draw(screen)
 
