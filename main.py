@@ -9,6 +9,7 @@ import player as py
 import asteroids as ast
 import asteroidfield as asf
 import gameover as gm
+import shot as sh
 
 def main():
     
@@ -19,9 +20,11 @@ def main():
     drawable = pygame.sprite.Group()
     updateable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
     py.Player.containers = (drawable, updateable)
     ast.Asteroids.containers = (asteroids, drawable, updateable)
     asf.AsteroidField.containers = (updateable)
+    sh.Shot.containers = (drawable, updateable, shots)
 
     print("Starting asteroids!")
     print(f"Screen width: {con.SCREEN_WIDTH}")
