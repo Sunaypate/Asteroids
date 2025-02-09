@@ -3,7 +3,7 @@ import random
 import constants as con
 import time
 
-
+pygame.font.init
 def rectangle_creator():
     return pygame.Rect(500, 300, 100, 100)
 
@@ -26,8 +26,9 @@ recta = rectangle_creator()
 rectb = rectangle_creator()
 rect_c = rectangle_creator()
 
-def gameover(screen, framerate):
-
+def gameover(screen, framerate, score):
+    death_font = pygame.font.SysFont("Comic Sans MS", 30)
+    death_surface = death_font.render(f"SCORE: {score}", False, (0, 0, 0))
 
 
     for i in range(1, 150):
@@ -49,3 +50,6 @@ def gameover(screen, framerate):
 
         pygame.display.flip()
         framerate.tick(100 - i)
+    screen.blit(death_surface,(0,0))
+    pygame.display.flip()
+    time.sleep(5)

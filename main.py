@@ -47,7 +47,7 @@ def main():
         for asteroid in asteroids:
             if character.collision(asteroid) == True:
                 print("Game Over!")
-                gm.gameover(screen, framerate)
+                gm.gameover(screen, framerate, timer)
                 print(timer)
                 return
             else:
